@@ -6,7 +6,7 @@ import App from "./components/app/app";
 const promoMovie = {
   title: `The Grand Budapest Hotel`,
   genre: `Drama`,
-  date: `2014`
+  date: 2014
 
 };
 
