@@ -9,17 +9,19 @@ import MyList from "../my-list/my-list.jsx";
 import Player from "../player/player.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 
+import filmsPropTypes from "../../prop-types/films-prop-types.js";
+import reviewsPropTypes from "../../prop-types/reviews-prop-types.js";
+
 const App = (props) => {
-  const {movieTitle, movieGenre, movieReleaseDate} = props;
+  const {promoMovie, films, reviews} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
           <MainScreen
-            movieTitle = {movieTitle}
-            movieGenre = {movieGenre}
-            movieReleaseDate = {movieReleaseDate}
+            promoMovie = {promoMovie}
+            films = {films}
           />
         </Route>
 
@@ -28,19 +30,28 @@ const App = (props) => {
         </Route>
 
         <Route exact path="/mylist">
-          <MyList />
+          <MyList
+            films = {films}
+          />
         </Route>
 
         <Route exact path="/films/:id">
-          <Film />
+          <Film
+            film = {films[0]}
+            reviews = {reviews}
+          />
         </Route>
 
         <Route exact path="/films/:id/review">
-          <AddReview />
+          <AddReview
+            film = {films[0]}
+          />
         </Route>
 
         <Route exact path="/player/:id">
-          <Player />
+          <Player
+            film = {films[0]}
+          />
         </Route>
       </Switch>
     </BrowserRouter>
@@ -48,9 +59,13 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  movieTitle: PropTypes.string.isRequired,
-  movieGenre: PropTypes.string.isRequired,
-  movieReleaseDate: PropTypes.number.isRequired
+  promoMovie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    date: PropTypes.number.isRequired
+  }),
+  films: filmsPropTypes,
+  reviews: reviewsPropTypes
 };
 
 export default App;
