@@ -27,8 +27,10 @@ class MoviesList extends PureComponent {
       movieTitle = {movie.title}
       movieCover = {movie.cover}
       movieId = {movie.id}
+      moviePath = {movie.video}
       movieHoverHandler = {this.movieHoverHandler}
-      key = {`film-${movie.id}`}
+      isActive = {this.state.activeMovie === movie.id}
+      key = {movie.id}
     />);
   }
 }
