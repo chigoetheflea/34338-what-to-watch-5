@@ -1,5 +1,5 @@
 const IMG_URL = `http://picsum.photos/248/152`;
-const VIDEO_URL = `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`;
+const VIDEO_URL = `http://fsfamily.ru/mvr.mp4`;
 
 export default [
   {
