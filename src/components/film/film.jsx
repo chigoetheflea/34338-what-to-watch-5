@@ -1,13 +1,16 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import Tabs from "../tabs/tabs.jsx";
+import MoviesList from "../movies-list/movies-list.jsx";
 
-import filmPropTypes from "../../prop-types/film-prop-types.js";
+import filmsPropTypes from "../../prop-types/films-prop-types.js";
 import reviewsPropTypes from "../../prop-types/reviews-prop-types.js";
 
-const ACTORS_LIST_DIVIDER = `, `;
-
 const Film = (props) => {
-  const {id, title, genre, year, poster, cover, description, rating, likes, director, actors} = props.film;
+  const {films} = props;
+  const {id, title, genre, year, poster, cover} = films[0];
+
+  const relatedFilms = films.filter((film) => film.genre === genre && film.id !== id);
 
   return (
     <>
@@ -76,37 +79,10 @@ const Film = (props) => {
             <img src={poster} alt={title} width="218" height="327" />
           </div>
 
-          <div className="movie-card__desc">
-            <nav className="movie-nav movie-card__nav">
-              <ul className="movie-nav__list">
-                <li className="movie-nav__item movie-nav__item--active">
-                  <a href="#" className="movie-nav__link">Overview</a>
-                </li>
-                <li className="movie-nav__item">
-                  <a href="#" className="movie-nav__link">Details</a>
-                </li>
-                <li className="movie-nav__item">
-                  <a href="#" className="movie-nav__link">Reviews</a>
-                </li>
-              </ul>
-            </nav>
-
-            <div className="movie-rating">
-              <div className="movie-rating__score">{rating.scores}</div>
-              <p className="movie-rating__meta">
-                <span className="movie-rating__level">{rating.textValue}</span>
-                <span className="movie-rating__count">{likes} ratings</span>
-              </p>
-            </div>
-
-            <div className="movie-card__text">
-              {description}
-
-              <p className="movie-card__director"><strong>Director: {director}</strong></p>
-
-              <p className="movie-card__starring"><strong>Starring: {actors.join(ACTORS_LIST_DIVIDER)}</strong></p>
-            </div>
-          </div>
+          <Tabs
+            film = {films[0]}
+            reviews = {props.reviews}
+          />
         </div>
       </div>
     </section>
@@ -116,41 +92,7 @@ const Film = (props) => {
         <h2 className="catalog__title">More like this</h2>
 
         <div className="catalog__movies-list">
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-            </h3>
-          </article>
+          <MoviesList films = {relatedFilms}/>
         </div>
       </section>
 
@@ -176,7 +118,7 @@ const Film = (props) => {
 };
 
 Film.propTypes = {
-  film: filmPropTypes,
+  films: filmsPropTypes,
   reviews: reviewsPropTypes
 };
 

@@ -5,7 +5,7 @@ export default [
   {
     id: 0,
     title: `Fantastic Beasts: The Crimes of Grindelwald`,
-    genre: `Fantasy`,
+    genre: `Drama`,
     year: 2016,
     poster: `${IMG_URL}?r=${Math.random()}`,
     cover: `${IMG_URL}?r=${Math.random()}`,
@@ -115,7 +115,7 @@ export default [
   {
     id: 5,
     title: `What We Do in the Shadows`,
-    genre: `Comedy`,
+    genre: `Drama`,
     year: 2009,
     poster: `${IMG_URL}?r=${Math.random()}`,
     cover: `${IMG_URL}?r=${Math.random()}`,
